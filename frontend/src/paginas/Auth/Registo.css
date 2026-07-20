@@ -1,0 +1,179 @@
+.registo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background-color: #fcfcfd;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.registo-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+}
+
+.registo-card h2 {
+  margin: 0 0 8px 0;
+  color: #111827;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.registo-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.registo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #646cff;
+  box-shadow: 0 0 0 4px rgba(100, 108, 255, 0.1);
+}
+
+.btn-registo {
+  padding: 14px;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-registo:hover {
+  background-color: #535bf2;
+}
+
+.btn-registo:active {
+  transform: scale(0.98);
+}
+
+.registo-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.registo-footer a {
+  color: #646cff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registo-footer a:hover {
+  text-decoration: underline;
+}
+
+.password-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.password-strength-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.strength-bar-container {
+  flex: 1;
+  background-color: #e5e7eb;
+  height: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar.nivel-1 {
+  width: 15%;
+  background-color: #94a3b8;
+}
+
+.strength-bar.nivel-2 {
+  width: 40%;
+  background-color: #ef4444;
+}
+
+.strength-bar.nivel-3 {
+  width: 70%;
+  background-color: #f59e0b;
+}
+
+.strength-bar.nivel-4 {
+  width: 100%;
+  background-color: #10b981;
+}
+
+.strength-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-width: 45px;
+  text-align: right;
+}
+
+.strength-text.muito-fraca { color: #94a3b8;
+}
+
+.strength-text.fraca { color: #ef4444;
+}
+
+.strength-text.media { color: #f59e0b;
+}
+
+.strength-text.forte { color: #10b981;
+}
+
+.password-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+  line-height: 1.2;
+}
