@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Tarefas")
+@Table(name = "tarefas")
 public class Tarefa {
 
     @Id
@@ -16,41 +16,32 @@ public class Tarefa {
 
     private String titulo;
     private String descricao;
-    private boolean concluida;
+    private String categoria;
+    private String status = "PENDENTE";
 
     public Tarefa() {
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
+    
+    public Tarefa(String titulo, String descricao, String categoria, String status) {
         this.titulo = titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
         this.descricao = descricao;
+        this.categoria = categoria;
+        this.status = status;
     }
 
-    public boolean isConcluida() {
-        return concluida;
-    }
+    // Getters e Setters continuam iguais...
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setConcluida(boolean concluida) {
-        this.concluida = concluida;
-    }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

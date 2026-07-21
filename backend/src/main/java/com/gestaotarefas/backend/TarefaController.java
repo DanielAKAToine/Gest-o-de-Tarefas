@@ -1,18 +1,13 @@
 package com.gestaotarefas.backend;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/tarefas")
+@RequestMapping("/api/tarefas")
 @CrossOrigin(origins = "http://localhost:5173")
 public class TarefaController {
 
@@ -28,22 +23,44 @@ public class TarefaController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Tarefa criar(@RequestBody Tarefa tarefa) {
         return tarefaRepository.save(tarefa);
     }
 
+    @PutMapping("/{id}")
+    public Tarefa atualizar(@PathVariable Long id, @RequestBody Tarefa tarefaAtualizada) {
+        return tarefaRepository.findById(id)
+                .map(tarefa -> {
+                    tarefa.setTitulo(tarefaAtualizada.getTitulo());
+                    tarefa.setDescricao(tarefaAtualizada.getDescricao());
+                    tarefa.setCategoria(tarefaAtualizada.getCategoria());
+                    tarefa.setStatus(tarefaAtualizada.getStatus());
+                    return tarefaRepository.save(tarefa);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada"));
+    }
+
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Long id) {
-    tarefaRepository.deleteById(id);
-}
+        if (!tarefaRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
+        }
+        tarefaRepository.deleteById(id);
+    }
 
-@PutMapping("/{id}/alternar")
-public Tarefa alternarConclusao(@PathVariable Long id) {
-    Tarefa tarefa = tarefaRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+    @PatchMapping("/{id}/alternar")
+    public Tarefa alternarConclusao(@PathVariable Long id) {
+        Tarefa tarefa = tarefaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada"));
 
-        tarefa.setConcluida(!tarefa.isConcluida()); 
-    
-    return tarefaRepository.save(tarefa);
-}
+        if ("CONCLUIDA".equalsIgnoreCase(tarefa.getStatus())) {
+            tarefa.setStatus("PENDENTE");
+        } else {
+            tarefa.setStatus("CONCLUIDA");
+        }
+
+        return tarefaRepository.save(tarefa);
+    }
 }
